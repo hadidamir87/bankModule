@@ -19,8 +19,8 @@ import java.util.Date;
 
 public abstract class EssentialEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
     @Version
     private Integer version;
     @CreatedDate

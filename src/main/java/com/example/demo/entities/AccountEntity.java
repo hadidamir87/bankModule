@@ -14,22 +14,36 @@ import java.util.Date;
 @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class AccountEntity extends EssentialEntity {
     @Column(unique = true, nullable = false)
     private Long accountNumber;
-    @Column(unique = true, nullable = false)
-    private Integer cvv2;
-//    private Date expireDate;
+//    private Long amount;
 
- /*   @OneToOne
-    private CardEntity cardNumber;
-    */
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "card_id" /*,referencedColumnName = "id"*/)
+    private CardEntity card;
 
-   /* @ManyToOne
+   /*
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_number", referencedColumnName = "id")
+    private AccountEntity account;
+*/
+
+
+
+   /*
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
+    private CardEntity card;
+*/
+
+
+/*
+
+    @ManyToOne
     @JoinColumn(name = "customer_id")
-    @Column(unique = true,nullable = false)
-    private CustomerEntity customer;
-    */
+    private CustomerEntity customerEntity;
+*/
 
 
 }

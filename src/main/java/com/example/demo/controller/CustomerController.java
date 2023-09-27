@@ -1,10 +1,13 @@
+/*
 package com.example.demo.controller;
+*/
 /*
 import com.example.demo.dto.convertor.CustomerDto;
 import com.example.demo.model.entities.CustomerEntity;
 import com.example.demo.service.CustomerService;
 import jakarta.transaction.Transactional;
-import org.springframework.web.bind.annotation.*;*/
+import org.springframework.web.bind.annotation.*;*//*
+
 
 import com.example.demo.dto.AccountDto;
 import com.example.demo.dto.CustomerDto;
@@ -26,7 +29,7 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
 
     public void insert(@RequestBody CustomerDto d) {
 
-        service.insert(converter.convertToE(d));
+         service.insert(converter.convertToE(d));
     }
 
 
@@ -37,18 +40,29 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
 //LOGGER.info("add argument is"+ name);
         return converter.convertToDto(service.findByFirstName(name));
     }
-
+*/
+/*
     @DeleteMapping("/{name}")
     public void deleteCustomerByFirstName(@PathVariable String name) {
 //
 //        service.findByFirstName(name);
         service.deleteCustomerEntityByFirstName(name);
+    }*//*
+
+
+    @DeleteMapping("/{id}")
+    public void deleteCustomerById(@PathVariable String id) {
+//
+        service.deleteById(id);
     }
 
-    /*
+*/
+/*
     @PutMapping("/{account}")
     public AccountEntity update(@PathVariable AccountDto accountDto) {
-        return service.
-    }
-*/
+
+        return service.s
+    }*//*
+
 }
+*/

@@ -6,11 +6,12 @@ import com.example.demo.service.CustomerService;
 import org.springframework.web.bind.annotation.*;*/
 
 import com.example.demo.dto.AccountDto;
+import com.example.demo.dto.CardDto;
 import com.example.demo.dto.CustomerDto;
 import com.example.demo.entities.AccountEntity;
-import com.example.demo.entities.CustomerEntity;
+//import com.example.demo.entities.CustomerEntity;
 import com.example.demo.service.AccountService;
-import com.example.demo.service.CustomerService;
+//import com.example.demo.service.CustomerService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +25,13 @@ public class AccountController extends BaseController<AccountEntity, AccountDto,
 //    @ResponseStatus(HttpStatus.CREATED)
     @Transactional
     public void add(@RequestBody AccountDto a) {
+//        AccountEntity accountForGettingCardNumber = converter.convertToE(a);
+//        accountForGettingCardNumber.getCard().setCardNumber(a.getCardNumber());
+//        converter.convertToE(a).getCard().setCardNumber();
+
 
         service.insert(converter.convertToE(a));
+//        service.insert(accountForGettingCardNumber);
     }
 
     @GetMapping("/get/{account_number}")
@@ -35,10 +41,9 @@ public class AccountController extends BaseController<AccountEntity, AccountDto,
         return converter.convertToDto(service.findByAccountN(account_number));
     }
 
-    @DeleteMapping("/{account_number}")
-    public void deleteByAccountNum(@PathVariable Long account_number) {
-
-       AccountDto accountDto= converter.convertToDto(service.findByAccountN(account_number));
-        service.deleteByAccountN(converter.convertToE(accountDto));
+    @DeleteMapping("{account_number}")
+    public void deleteByAccount(Long an) {
+        service.deleteByAccountN(an);
     }
+
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class AbstractDto {
 
-    private String id;
+    private Long id;
     private Integer version;
     private Date insertTimestamp;
     private Date lastUpdateTimestamp;

@@ -1,3 +1,4 @@
+/*
 package com.example.demo.entities;
 
 import jakarta.persistence.*;
@@ -7,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
+
+import java.util.List;
 
 //import javax.persistence.*;
 
@@ -22,11 +25,10 @@ public class CustomerEntity extends EssentialEntity {
     private String firstName;
     @Column
     private String surName;
-//    @Column(unique = true,nullable = false)
+    //    @Column(unique = true,nullable = false)
 //    private Integer nationalCode;
-
-    /*
-    @OneToMany
+    // @Column(name = "cus")
+    @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<AccountEntity> accounts;
-*/
 }
+*/
