@@ -6,13 +6,15 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@Builder
+@Builder
 public class CustomerDto extends AbstractDto {
 //    private String id ;
 //    @Size(max = 5 , message = "User_Max_Size")
     private String firstName;
     private String surName;
-   // private AccountEntity account;
+    private Long nationalCode;
+    private Long phoneNumber;
+//    private AccountEntity account;
 //    private String nationalCode;
 //    private Integer age;
 

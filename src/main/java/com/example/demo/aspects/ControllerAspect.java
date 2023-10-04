@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 */
+/*
 
 import com.example.demo.repositories.LogRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -66,3 +67,4 @@ public class ControllerAspect {
         return value;
     }
 }
+*/

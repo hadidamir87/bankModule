@@ -11,5 +11,6 @@ public interface AccountRepository extends JpaRepository<AccountEntity,Long> {
 //    AccountEntity findByCard_CardNumber(String card);
 //
     AccountEntity findByAccountNumber(Long accountNumber);
+//    AccountEntity saveByNationalCode(Long nationalCode);
 
 }
