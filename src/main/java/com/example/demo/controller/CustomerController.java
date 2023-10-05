@@ -11,7 +11,7 @@ import com.example.demo.dto.CustomerDto;
 import com.example.demo.entities.AccountEntity;
 import com.example.demo.entities.CustomerEntity;
 import com.example.demo.service.CustomerService;
-import org.springframework.data.mongodb.repository.Update;
+//import org.springframework.data.mongodb.repository.Update;
 //import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,15 +29,13 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
          service.insert(converter.convertToE(d));
     }
 
-/*
-    @GetMapping("/get/{name}")
+    @GetMapping("/get/{id}")
 //    @Transactional
-    public CustomerDto findByFirstName(@PathVariable String name) {
+    public CustomerDto findById(@PathVariable Long id) {
 //LOGGER.info("add method called");
 //LOGGER.info("add argument is"+ name);
-        return converter.convertToDto(service.findByFirstName(name));
+        return converter.convertToDto(service.findById(id).get());
     }
-    */
 
 
    /*

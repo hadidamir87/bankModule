@@ -1,7 +1,5 @@
 package com.example.demo.service;
 
-//import com.example.demo.model.entities.CustomerEntity;
-
 import com.example.demo.entities.AccountEntity;
 import com.example.demo.entities.CardEntity;
 import com.example.demo.repositories.CustomerRepository;
@@ -25,23 +23,19 @@ import java.util.Optional;
 public class CustomerService extends BaseService<CustomerEntity, CustomerRepository> {
     @Autowired
     private CardService cardService;
-    //    @Autowired
-//    private CardEntity card;
-//    @Autowired
-//    private AccountEntity account;
+
     @Autowired
     private AccountService accountService;
 
     @Transactional
     public void insert(CustomerEntity customer) {
-//        accountService.insert(customer.getAccount());
 
-        AccountEntity account=new AccountEntity();
+        AccountEntity account = new AccountEntity();
         account.setAccountNumber(customer.getNationalCode() / 10000);
         account.setCustomer(customer);
         accountService.insert(account);
 
-        CardEntity card=new CardEntity();
+        CardEntity card = new CardEntity();
         card.setCardNumber((long) (Math.random() * 1000));
         card.setCvv2((long) (Math.random() * 10002));
         LocalDateTime dateTime = LocalDateTime.now();
@@ -50,12 +44,13 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
         card.setCustomer(customer);
         cardService.insert(card);
 
-//        account.setCustomer(customer);
-
         repository.save(customer);
 
     }
 
+    public Optional<CustomerEntity> findById(Long id) {
+        return repository.findById(id);
+    }
 
 /*
 
@@ -100,12 +95,6 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
     }*/
 
 
-/*
-
-    public Optional<CustomerEntity> findById(String id) {
-        return repository.findById(id);
-    }
-*/
 
 
 /*
