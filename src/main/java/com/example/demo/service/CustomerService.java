@@ -48,8 +48,40 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
 
     }
 
-    public Optional<CustomerEntity> findById(Long id) {
-        return repository.findById(id);
+    public CustomerEntity updateCustomer(CustomerEntity c) throws Exception {
+        try {
+            CustomerEntity currentCustomer=repository.findById(c.getId()).orElse(null);
+//            if (c.getId()!=null){
+//                currentCustomer=
+//            }
+            if (c.getFirstName() != null) {
+                currentCustomer.setFirstName(c.getFirstName());
+            }
+            if (c.getSurName() != null) {
+                currentCustomer.setSurName(c.getSurName());
+            }
+            if (c.getNationalCode() != null) {
+                currentCustomer.setNationalCode(c.getNationalCode());
+            }
+            if (c.getPhoneNumber() != null) {
+                currentCustomer.setPhoneNumber(c.getPhoneNumber());
+            }
+            return repository.save(currentCustomer);
+
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    public CustomerEntity findById(Long id) {
+        return repository.findById(id).get();
+    }
+
+
+    public void deleteById(Long id) {
+//        CustomerService customerService=new CustomerService();
+
+        repository.delete(repository.findById(id).get());
     }
 
 /*
@@ -62,11 +94,6 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
 */
 
 
-    public CustomerEntity update(CustomerEntity c) {
-
-        return repository.save(c);
-
-    }
 /*
 
     public void deleteCustomerEntityByFirstName(String name) {
@@ -97,14 +124,6 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
 
 
 
-/*
-
-    public void deleteCustomerById(String id) {
-//        CustomerService customerService=new CustomerService();
-
-        repository.delete(repository.findById(id));
-    }
-*/
 
 /*
 
