@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.exceptionHandller.exceptions.ServiceException;
 import com.example.demo.service.CustomerService;
 import jakarta.transaction.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
     @PostMapping("/createCustomer")
     @Transactional
 
-    public void insert(@RequestBody CustomerDto d) {
+    public void insert(@RequestBody CustomerDto d) throws ServiceException{
 
         service.insert(converter.convertToE(d));
     }
@@ -36,7 +37,7 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
     */
     @GetMapping("/get/{id}")
 //    @Transactional
-    public CustomerDto findById(@PathVariable Long id) {
+    public CustomerDto findById(@PathVariable Long id) throws ServiceException {
 //LOGGER.info("add method called");
 //LOGGER.info("add argument is"+ name);
         return converter.convertToDto(service.findById(id));
@@ -44,7 +45,7 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
 
 
     @DeleteMapping("/{id}")
-    public void deleteCustomerById(@PathVariable Long id) {
+    public void deleteCustomerById(@PathVariable Long id)throws ServiceException {
 
         service.deleteById(id);
     }

@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class ServiceException extends Exception{
 
-    private String errorCode;
+    private final String errorCode;
 
     public ServiceException(String errorCode) {
         this.errorCode = errorCode;
