@@ -1,7 +1,11 @@
 package com.example.demo.exceptionHandller;
 
+import com.example.demo.exceptionHandller.exceptions.DuplicateEntry;
 import com.example.demo.exceptionHandller.exceptions.ExceptionResponse;
-import org.hibernate.service.spi.ServiceException;
+import com.example.demo.exceptionHandller.exceptions.ServiceException;
+import com.example.demo.exceptionHandller.exceptions.handledExceptions.CheckNullityOfCreateCustomer;
+import jakarta.annotation.PostConstruct;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -10,52 +14,67 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.lang.reflect.Field;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.Arrays;
+
 import java.util.NoSuchElementException;
+import java.util.Properties;
 
 @ControllerAdvice
+
 public class RestExceptionHandler {
+
+
+//    private final Properties properties = new Properties();
+
 /*
-    @ExceptionHandler(ServiceException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ExceptionResponse> getException(ServiceException serviceException) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse();
-        exceptionResponse.setError(true);
-        exceptionResponse.setMessage(serviceException.getMessage());//this must be re place.
-        return ResponseEntity.badRequest().body(exceptionResponse);
+    @PostConstruct
+    public void init() {
+        try {
+            properties.load(new FileReader(
+                    "F:\\H1\\Education\\programming\\Java\\develop\\demo1\\bank\\src\\main\\resources\\exception_fa_IR.properties",
+                    StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }*/
+
 
     //NullPointerException
     //SQLIntegrityConstraintViolationException
     /*exception instanceof SQLIntegrityConstraintViolationException*/
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ExceptionResponse> getValidation(Exception exception) {
-//        exception.printStackTrace();
+    @ExceptionHandler(RuntimeException.class)
+//    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ExceptionResponse> getValidation(RuntimeException exception) {
         ExceptionResponse exceptionResponse = new ExceptionResponse();
-      /*  if (Arrays.toString(exception.getStackTrace()) =="SQLIntegrityConstraintViolationException") {
-            exceptionResponse.setMessage("duplicate element.");
-            return ResponseEntity.badRequest().body(exceptionResponse);
-
-        }*/
-        if (exception instanceof SQLIntegrityConstraintViolationException){
-            exceptionResponse.setMessage("duplicate element.");
-            return ResponseEntity.badRequest().body(exceptionResponse);
-
-
-        }        if (exception instanceof NullPointerException) {
+        if (exception instanceof NullPointerException) {
             exceptionResponse.setMessage("customer's null.");
+            return ResponseEntity.badRequest().body(exceptionResponse);
         }
         if (exception instanceof NoSuchElementException) {
-            exceptionResponse.setMessage("id is not fount");
+            exceptionResponse.setMessage("id is not found.");
+            return ResponseEntity.badRequest().body(exceptionResponse);
         }
-//        exception.printStackTrace();
+        if (exception instanceof ArithmeticException) {
+            exceptionResponse.setMessage(".");
+            return ResponseEntity.badRequest().body(exceptionResponse);
+        }
+        if (exception instanceof DataIntegrityViolationException) {
+            exceptionResponse.setMessage("duplicate entry.");
 
+        } else {
+
+            exceptionResponse.setMessage("system's error.");
+
+        }
         exceptionResponse.setError(true);
         return ResponseEntity.badRequest().body(exceptionResponse);
     }
+
+
 
 /*
     @ExceptionHandler(RuntimeException.class)
@@ -65,12 +84,13 @@ public class RestExceptionHandler {
         ExceptionResponse exceptionResponse = new ExceptionResponse();
         if (exception instanceof NullPointerException) {
             exceptionResponse.setMessage("customer's id is not enough.");
+
         }
         if (exception instanceof NoSuchElementException){
             exceptionResponse.setMessage("id is null");
 
         }
-        if (exception.getStackTrace().equals("SQLIntegrityConstraintViolationException")) {
+        if (exception.getStackTrace().equals("DataIntegrityViolationException")) {
             exceptionResponse.setMessage("duplicate entry.");
         }else {
 //        FieldError fieldError=exception.getBindingResult().getFieldError();
@@ -83,4 +103,6 @@ public class RestExceptionHandler {
         return ResponseEntity.badRequest().body(exceptionResponse);
     }*/
 }
+
+
 

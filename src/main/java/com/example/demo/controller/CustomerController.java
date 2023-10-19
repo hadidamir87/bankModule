@@ -1,11 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.exceptionHandller.exceptions.DuplicateEntry;
 import com.example.demo.exceptionHandller.exceptions.ServiceException;
+import com.example.demo.exceptionHandller.exceptions.handledExceptions.CheckNullityOfCreateCustomer;
 import com.example.demo.service.CustomerService;
 import jakarta.transaction.Transactional;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.dto.CustomerDto;
 import com.example.demo.entities.CustomerEntity;
+
+import java.sql.SQLException;
 
 @RestController
 @RequestMapping("/customer")
@@ -14,8 +18,7 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
     @PostMapping("/createCustomer")
     @Transactional
 
-    public void insert(@RequestBody CustomerDto d) throws ServiceException{
-
+    public void insert(@RequestBody CustomerDto d) throws Exception {
         service.insert(converter.convertToE(d));
     }
 
@@ -37,7 +40,7 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
     */
     @GetMapping("/get/{id}")
 //    @Transactional
-    public CustomerDto findById(@PathVariable Long id) throws ServiceException {
+    public CustomerDto findById(@PathVariable Long id) throws CheckNullityOfCreateCustomer {
 //LOGGER.info("add method called");
 //LOGGER.info("add argument is"+ name);
         return converter.convertToDto(service.findById(id));
@@ -45,7 +48,7 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
 
 
     @DeleteMapping("/{id}")
-    public void deleteCustomerById(@PathVariable Long id)throws ServiceException {
+    public void deleteCustomerById(@PathVariable Long id) throws ServiceException {
 
         service.deleteById(id);
     }

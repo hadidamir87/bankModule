@@ -2,6 +2,9 @@ package com.example.demo.service;
 
 import com.example.demo.entities.AccountEntity;
 import com.example.demo.entities.CardEntity;
+import com.example.demo.exceptionHandller.exceptions.DuplicateEntry;
+import com.example.demo.exceptionHandller.exceptions.ServiceException;
+import com.example.demo.exceptionHandller.exceptions.handledExceptions.CheckNullityOfCreateCustomer;
 import com.example.demo.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -28,7 +32,7 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
     private AccountService accountService;
 
     @Transactional
-    public void insert(CustomerEntity customer) {
+    public void insert(CustomerEntity customer)  {
 
         AccountEntity account = new AccountEntity();
         account.setAccountNumber(customer.getNationalCode() / 10000);
@@ -45,12 +49,11 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
         cardService.insert(card);
 
         repository.save(customer);
-
     }
 
     public CustomerEntity updateCustomer(CustomerEntity c) throws Exception {
         try {
-            CustomerEntity currentCustomer=repository.findById(c.getId()).orElse(null);
+            CustomerEntity currentCustomer = repository.findById(c.getId()).orElse(null);
 //            if (c.getId()!=null){
 //                currentCustomer=
 //            }
