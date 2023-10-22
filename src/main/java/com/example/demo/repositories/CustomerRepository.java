@@ -20,6 +20,8 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> 
 //    CustomerEntity deleteCustomerEntityByFirstName(String name);
 //    CustomerEntity findByFirstNameLike(String name);
 //    CustomerEntity findById(String id);
+    Boolean existsByNationalCode(Long nationalCode);
+
 
 }
 

@@ -2,9 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.entities.AccountEntity;
 import com.example.demo.entities.CardEntity;
-import com.example.demo.exceptionHandller.exceptions.DuplicateEntry;
+//import com.example.demo.exceptionHandller.exceptions.IdNotFoundException;
 import com.example.demo.exceptionHandller.exceptions.ServiceException;
-import com.example.demo.exceptionHandller.exceptions.handledExceptions.CheckNullityOfCreateCustomer;
 import com.example.demo.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.CustomerDto;
 import com.example.demo.entities.CustomerEntity;
-import com.example.demo.repositories.CustomerRepository;
 //import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -32,7 +27,17 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
     private AccountService accountService;
 
     @Transactional
-    public void insert(CustomerEntity customer)  {
+    public void insert(CustomerEntity customer) throws ServiceException {
+        if (repository.existsByNationalCode(customer.getNationalCode())) {
+            throw new ServiceException("duplicateStudentNew");
+        }
+        if (customer.getNationalCode() == null) {
+            throw new ServiceException("nationalCodeIsNecessary");
+        }
+
+        if (customer.getPhoneNumber() == null) {
+            throw new ServiceException("phoneNumberIsNecessary");
+        }
 
         AccountEntity account = new AccountEntity();
         account.setAccountNumber(customer.getNationalCode() / 10000);
@@ -76,7 +81,13 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
         }
     }
 
-    public CustomerEntity findById(Long id) {
+    public CustomerEntity findById(Long id) throws ServiceException {
+
+
+     /*   if (repository.findById(id) == null) {
+            throw new ServiceException("idIsNull");
+
+        }*/
         return repository.findById(id).get();
     }
 

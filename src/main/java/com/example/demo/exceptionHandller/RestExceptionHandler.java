@@ -1,15 +1,13 @@
 package com.example.demo.exceptionHandller;
 
-import com.example.demo.exceptionHandller.exceptions.DuplicateEntry;
-import com.example.demo.exceptionHandller.exceptions.ExceptionResponse;
+import com.example.demo.exceptionHandller.exceptions.DuplicateCustomerEntry;
+import com.example.demo.exceptionHandller.exceptions.ErrorDetailsForClient;
+//import com.example.demo.exceptionHandller.exceptions.IdNotFoundException;
 import com.example.demo.exceptionHandller.exceptions.ServiceException;
-import com.example.demo.exceptionHandller.exceptions.handledExceptions.CheckNullityOfCreateCustomer;
 import jakarta.annotation.PostConstruct;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 import java.util.NoSuchElementException;
 import java.util.Properties;
@@ -27,29 +23,61 @@ import java.util.Properties;
 
 public class RestExceptionHandler {
 
+    //NullPointerException:unchecked
+    //SQLIntegrityConstraintViolationException
+    //NoSuchElementException:unchecked
 
-//    private final Properties properties = new Properties();
+    private final Properties properties = new Properties();
 
-/*
     @PostConstruct
     public void init() {
         try {
             properties.load(new FileReader(
-                    "F:\\H1\\Education\\programming\\Java\\develop\\demo1\\bank\\src\\main\\resources\\exception_fa_IR.properties",
+                    "F:\\H1\\Education\\programming\\Java\\develop\\demo1\\bank\\src\\main\\resources\\exceptions_fa_IR.properties",
                     StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
+
+    @ExceptionHandler(ServiceException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorDetailsForClient> getValidation(ServiceException exception) {
+        ErrorDetailsForClient exceptionResponse = new ErrorDetailsForClient();
+        exceptionResponse.setError(true);
+        String property = properties.getProperty(exception.getErrorCode());
+        exceptionResponse.setError(true);
+
+        if (property == null) {
+            property = properties.getProperty("default");
+        }
+        exceptionResponse.setMessage(property);
+
+        return ResponseEntity.badRequest().body(exceptionResponse);
+    }
 
 
-    //NullPointerException
-    //SQLIntegrityConstraintViolationException
-    /*exception instanceof SQLIntegrityConstraintViolationException*/
+
+    @ExceptionHandler(DuplicateCustomerEntry.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorDetailsForClient> getValidation(DuplicateCustomerEntry exception) {
+        ErrorDetailsForClient exceptionResponse = new ErrorDetailsForClient();
+        exceptionResponse.setError(true);
+        String property = properties.getProperty(exception.getErrorCode());
+        exceptionResponse.setError(true);
+
+        if (property == null) {
+            property = properties.getProperty("default");
+        }
+        exceptionResponse.setMessage(property);
+
+        return ResponseEntity.badRequest().body(exceptionResponse);
+    }
+/*
     @ExceptionHandler(RuntimeException.class)
-//    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ExceptionResponse> getValidation(RuntimeException exception) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse();
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorDetailsForClient> getValidation(RuntimeException exception) {
+        ErrorDetailsForClient exceptionResponse = new ErrorDetailsForClient();
         if (exception instanceof NullPointerException) {
             exceptionResponse.setMessage("customer's null.");
             return ResponseEntity.badRequest().body(exceptionResponse);
@@ -72,7 +100,7 @@ public class RestExceptionHandler {
         }
         exceptionResponse.setError(true);
         return ResponseEntity.badRequest().body(exceptionResponse);
-    }
+    }*/
 
 
 
@@ -102,6 +130,25 @@ public class RestExceptionHandler {
         }
         return ResponseEntity.badRequest().body(exceptionResponse);
     }*/
+
+
+/*
+    @ExceptionHandler(IdNotFoundException.class)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ExceptionResponse> getValidation(IdNotFoundException exception) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse();
+        exceptionResponse.setError(true);
+        String property = properties.getProperty(exception.getErrorCode());
+        exceptionResponse.setError(true);
+
+        if (property == null) {
+            property = properties.getProperty("default");
+        }
+        exceptionResponse.setMessage(property);
+
+        return ResponseEntity.badRequest().body(exceptionResponse);
+    }*/
+
 }
 
 

@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 
 @Getter
-public class ServiceException extends RuntimeException{
+public class ServiceException extends Exception{
 
     private final String errorCode;
 
