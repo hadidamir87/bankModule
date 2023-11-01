@@ -1,10 +1,7 @@
-package com.example.demo.dto;
+package com.example.demo.model.dto;
 
 
 //import com.example.demo.entities.CustomerEntity;
-import com.example.demo.entities.CardEntity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 //@EqualsAndHashCode(callSuper = true)
@@ -12,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class AccountDto extends AbstractDto{
 //    private AccountType accountType;
     private Long accountNumber;

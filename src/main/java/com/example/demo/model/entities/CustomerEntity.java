@@ -1,12 +1,9 @@
-package com.example.demo.entities;
+package com.example.demo.model.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.RelationTargetAuditMode;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

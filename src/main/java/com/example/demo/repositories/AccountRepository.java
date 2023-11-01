@@ -3,7 +3,7 @@ package com.example.demo.repositories;
 import com.example.demo.model.entities.AccountEntity;
 import org.springframework.data.jpa.repository.JpaRepository;*/
 
-import com.example.demo.entities.AccountEntity;
+import com.example.demo.model.entities.AccountEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AccountRepository extends JpaRepository<AccountEntity,Long> {

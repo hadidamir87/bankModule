@@ -5,10 +5,8 @@ import com.example.demo.model.entities.CustomerEntity;
 import com.example.demo.service.CustomerService;
 import org.springframework.web.bind.annotation.*;*/
 
-import com.example.demo.dto.AccountDto;
-import com.example.demo.dto.CardDto;
-import com.example.demo.dto.CustomerDto;
-import com.example.demo.entities.AccountEntity;
+import com.example.demo.model.dto.AccountDto;
+import com.example.demo.model.entities.AccountEntity;
 //import com.example.demo.entities.CustomerEntity;
 import com.example.demo.service.AccountService;
 //import com.example.demo.service.CustomerService;

@@ -1,11 +1,7 @@
-package com.example.demo.dto.convertor;//package com.example.demo.model.convertor;
+package com.example.demo.model.dto.convertor;//package com.example.demo.model.convertor;
 
 
-import com.example.demo.dto.AccountDto;
-import com.example.demo.entities.AccountEntity;
 import org.hibernate.service.spi.ServiceException;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;

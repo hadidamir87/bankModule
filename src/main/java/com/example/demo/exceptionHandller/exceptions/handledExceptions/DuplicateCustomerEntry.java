@@ -1,4 +1,4 @@
-package com.example.demo.exceptionHandller.exceptions;
+package com.example.demo.exceptionHandller.exceptions.handledExceptions;
 
 public class DuplicateCustomerEntry extends RuntimeException {
     private final String errorCode;

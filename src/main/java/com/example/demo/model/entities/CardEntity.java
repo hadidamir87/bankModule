@@ -1,15 +1,13 @@
 
-package com.example.demo.entities;
+package com.example.demo.model.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 //
 //import javax.persistence.Entity;
 //import javax.persistence.Table;

@@ -1,14 +1,14 @@
-package com.example.demo.dto;//package com.example.demo.dto;
+package com.example.demo.model.dto;//package com.example.demo.dto;
 
-import com.example.demo.entities.AccountEntity;
 import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class CustomerDto extends AbstractDto {
-//    private String id ;
+    //    private String id ;
 //    @Size(max = 5 , message = "User_Max_Size")
     private Long id;
     private String firstName;

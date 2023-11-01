@@ -1,4 +1,4 @@
-package com.example.demo.exceptionHandller.exceptions;
+package com.example.demo.exceptionHandller.exceptions.handledExceptions;
 
 import lombok.Data;
 

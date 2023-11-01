@@ -1,6 +1,6 @@
 package com.example.demo.repositories;
 
-import com.example.demo.entities.CustomerEntity;
+import com.example.demo.model.entities.CustomerEntity;
 //import com.example.demo.model.entities.CustomerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -8,8 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 //import com.example.demo.entities.CustomerEntity;
 
-
-import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
 
 //    CustomerEntity findByAccounts(Long id);

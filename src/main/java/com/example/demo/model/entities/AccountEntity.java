@@ -1,14 +1,11 @@
-package com.example.demo.entities;
+package com.example.demo.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.RelationTargetAuditMode;
 import org.springframework.stereotype.Component;
 
 //import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+
 
 //@EqualsAndHashCode(callSuper = true)
 @Entity

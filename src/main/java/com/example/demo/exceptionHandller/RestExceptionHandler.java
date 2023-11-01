@@ -1,11 +1,12 @@
 package com.example.demo.exceptionHandller;
 
-import com.example.demo.exceptionHandller.exceptions.DuplicateCustomerEntry;
-import com.example.demo.exceptionHandller.exceptions.ErrorDetailsForClient;
+import com.example.demo.exceptionHandller.exceptions.handledExceptions.DuplicateCustomerEntry;
+import com.example.demo.exceptionHandller.exceptions.handledExceptions.ErrorDetailsForClient;
 //import com.example.demo.exceptionHandller.exceptions.IdNotFoundException;
 import com.example.demo.exceptionHandller.exceptions.ServiceException;
 import jakarta.annotation.PostConstruct;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,7 +17,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import java.util.NoSuchElementException;
 import java.util.Properties;
 
 @ControllerAdvice
@@ -28,6 +28,7 @@ public class RestExceptionHandler {
     //NoSuchElementException:unchecked
 
     private final Properties properties = new Properties();
+    private static final Logger LOGGER= LoggerFactory.getLogger(RestExceptionHandler.class);
 
     @PostConstruct
     public void init() {
@@ -43,6 +44,8 @@ public class RestExceptionHandler {
     @ExceptionHandler(ServiceException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorDetailsForClient> getValidation(ServiceException exception) {
+        LOGGER.error("service exception",exception);
+        LOGGER.debug("test for debug",exception);
         ErrorDetailsForClient exceptionResponse = new ErrorDetailsForClient();
         exceptionResponse.setError(true);
         String property = properties.getProperty(exception.getErrorCode());
@@ -56,21 +59,20 @@ public class RestExceptionHandler {
         return ResponseEntity.badRequest().body(exceptionResponse);
     }
 
-
-
     @ExceptionHandler(DuplicateCustomerEntry.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorDetailsForClient> getValidation(DuplicateCustomerEntry exception) {
+        LOGGER.error("duplicate customer entry.",exception);
+        LOGGER.debug("test for debug in duplicate exception.",exception);
+
         ErrorDetailsForClient exceptionResponse = new ErrorDetailsForClient();
-        exceptionResponse.setError(true);
         String property = properties.getProperty(exception.getErrorCode());
         exceptionResponse.setError(true);
 
         if (property == null) {
-            property = properties.getProperty("default");
+            property = properties.getProperty("idIsNull");
         }
         exceptionResponse.setMessage(property);
-
         return ResponseEntity.badRequest().body(exceptionResponse);
     }
 /*

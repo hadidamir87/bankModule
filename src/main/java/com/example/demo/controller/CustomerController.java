@@ -1,12 +1,13 @@
 package com.example.demo.controller;
 
 //import com.example.demo.exceptionHandller.exceptions.IdNotFoundException;
+
 import com.example.demo.exceptionHandller.exceptions.ServiceException;
-        import com.example.demo.service.CustomerService;
+import com.example.demo.service.CustomerService;
 import jakarta.transaction.Transactional;
-        import org.springframework.web.bind.annotation.*;
-import com.example.demo.dto.CustomerDto;
-import com.example.demo.entities.CustomerEntity;
+import org.springframework.web.bind.annotation.*;
+import com.example.demo.model.dto.CustomerDto;
+import com.example.demo.model.entities.CustomerEntity;
 
 @RestController
 @RequestMapping("/customer")
@@ -14,12 +15,16 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
 
     @PostMapping("/createCustomer")
     @Transactional
-
     public void insert(@RequestBody CustomerDto d) throws ServiceException {
+//        LOGGER.debug("insert method is called.");
+//        LOGGER.info("insert method in customerController's class called.",d);
+
 
         service.insert(converter.convertToE(d));
 
     }
+    // TODO: 10/25/2023 implement validation.
+
 
     @PutMapping("/updateCustomer")
     public CustomerDto update(@RequestBody CustomerDto customerDto) throws Exception {

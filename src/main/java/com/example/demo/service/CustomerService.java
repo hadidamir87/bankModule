@@ -1,17 +1,18 @@
 package com.example.demo.service;
 
-import com.example.demo.entities.AccountEntity;
-import com.example.demo.entities.CardEntity;
+import com.example.demo.model.entities.AccountEntity;
+import com.example.demo.model.entities.CardEntity;
 //import com.example.demo.exceptionHandller.exceptions.IdNotFoundException;
 import com.example.demo.exceptionHandller.exceptions.ServiceException;
+import com.example.demo.exceptionHandller.exceptions.handledExceptions.DuplicateCustomerEntry;
 import com.example.demo.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import com.example.demo.dto.CustomerDto;
-import com.example.demo.entities.CustomerEntity;
+import com.example.demo.model.dto.CustomerDto;
+import com.example.demo.model.entities.CustomerEntity;
 //import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 
@@ -28,15 +29,16 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
 
     @Transactional
     public void insert(CustomerEntity customer) throws ServiceException {
+
         if (repository.existsByNationalCode(customer.getNationalCode())) {
-            throw new ServiceException("duplicateStudentNew");
+            throw new DuplicateCustomerEntry("duplicateStudentNew");
         }
         if (customer.getNationalCode() == null) {
-            throw new ServiceException("nationalCodeIsNecessary");
+            throw new DuplicateCustomerEntry("nationalCodeIsNecessary");
         }
 
         if (customer.getPhoneNumber() == null) {
-            throw new ServiceException("phoneNumberIsNecessary");
+            throw new DuplicateCustomerEntry("phoneNumberIsNecessary");
         }
 
         AccountEntity account = new AccountEntity();
