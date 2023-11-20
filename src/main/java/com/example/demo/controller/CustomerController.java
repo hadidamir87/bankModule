@@ -1,39 +1,39 @@
 package com.example.demo.controller;
 
-//import com.example.demo.exceptionHandller.exceptions.IdNotFoundException;
-
 import com.example.demo.exceptionHandller.exceptions.ServiceException;
 import com.example.demo.service.CustomerService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.model.dto.CustomerDto;
 import com.example.demo.model.entities.CustomerEntity;
 
 @RestController
 @RequestMapping("/customer")
+
 public class CustomerController extends BaseController<CustomerEntity, CustomerDto, CustomerService> {
 
     @PostMapping("/createCustomer")
     @Transactional
-    public void insert(@RequestBody CustomerDto d) throws ServiceException {
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void insert(@Valid @RequestBody CustomerDto d) throws ServiceException {
 //        LOGGER.debug("insert method is called.");
 //        LOGGER.info("insert method in customerController's class called.",d);
-
-
         service.insert(converter.convertToE(d));
-
     }
     // TODO: 10/25/2023 implement validation.
 
 
     @PutMapping("/updateCustomer")
-    public CustomerDto update(@RequestBody CustomerDto customerDto) throws Exception {
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public CustomerDto update( @RequestBody CustomerDto customerDto) throws Exception {
 
         return converter.convertToDto(service.updateCustomer(converter.convertToE(customerDto)));
     }
 
     /*
-
         @PutMapping("/updateCustomer")
         public CustomerDto update(@PathVariable Long id) throws Exception {
             service.updateById(service.findById(id));

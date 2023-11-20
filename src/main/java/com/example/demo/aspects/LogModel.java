@@ -12,9 +12,7 @@ import java.lang.annotation.Documented;
 @Data
 @Document(collection = "bank'sLog")
 public class LogModel {
-//    @MongoId
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @MongoId
     private String id;
     private String methodName;
     private Object request;

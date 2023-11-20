@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.dto.CardDto;
 import com.example.demo.model.entities.CardEntity;
 import com.example.demo.service.CardService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/card")
 
 public class CardController extends BaseController<CardEntity, CardDto, CardService> {
+    ObjectMapper objectMapper=new ObjectMapper();
     @PostMapping("/createCard")
 //    @ResponseStatus(HttpStatus.CREATED)
 //    @Transactional
