@@ -6,6 +6,7 @@ import com.example.demo.model.entities.CardEntity;
 import com.example.demo.exceptionHandller.exceptions.ServiceException;
 import com.example.demo.exceptionHandller.exceptions.handledExceptions.DuplicateCustomerEntry;
 import com.example.demo.repositories.CustomerRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
+//@Valid
 public class CustomerService extends BaseService<CustomerEntity, CustomerRepository> {
     @Autowired
     private CardService cardService;

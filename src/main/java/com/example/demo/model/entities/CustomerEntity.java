@@ -26,7 +26,7 @@ public class CustomerEntity extends EssentialEntity {
     @Column(unique = true, nullable = false)
     private Long nationalCode;
     @Column(unique = true, nullable = false)
-    private Long phoneNumber;
+    private String phoneNumber;
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
     private AccountEntity account;

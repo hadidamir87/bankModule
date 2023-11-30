@@ -20,4 +20,5 @@ public class LogModel {
     private String errorTrace;
 
 
+
 }

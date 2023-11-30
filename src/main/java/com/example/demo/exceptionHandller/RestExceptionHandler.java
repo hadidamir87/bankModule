@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -28,7 +30,7 @@ public class RestExceptionHandler {
     //NoSuchElementException:unchecked
 
     private final Properties properties = new Properties();
-    private static final Logger LOGGER= LoggerFactory.getLogger(RestExceptionHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RestExceptionHandler.class);
 
     @PostConstruct
     public void init() {
@@ -44,8 +46,8 @@ public class RestExceptionHandler {
     @ExceptionHandler(ServiceException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorDetailsForClient> getValidation(ServiceException exception) {
-        LOGGER.error("service exception",exception);
-        LOGGER.debug("test for debug",exception);
+        LOGGER.error("service exception", exception);
+        LOGGER.debug("test for debug", exception);
         ErrorDetailsForClient exceptionResponse = new ErrorDetailsForClient();
         exceptionResponse.setError(true);
         String property = properties.getProperty(exception.getErrorCode());
@@ -59,11 +61,28 @@ public class RestExceptionHandler {
         return ResponseEntity.badRequest().body(exceptionResponse);
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorDetailsForClient> getValidations(MethodArgumentNotValidException exception) {
+        LOGGER.error("service exception", exception);
+        LOGGER.debug("test for debug", exception);
+        ErrorDetailsForClient exceptionResponse = new ErrorDetailsForClient();
+        exceptionResponse.setError(true);
+        FieldError fieldError = exception.getBindingResult().getFieldError();
+        String message =
+                "error in field :" +fieldError.getField()+"should have this pattern :"+fieldError.getDefaultMessage();
+        exceptionResponse.setMessage(message);
+        return ResponseEntity.badRequest().
+                body(exceptionResponse);
+
+    }
+
+
     @ExceptionHandler(DuplicateCustomerEntry.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorDetailsForClient> getValidation(DuplicateCustomerEntry exception) {
-        LOGGER.error("duplicate customer entry.",exception);
-        LOGGER.debug("test for debug in duplicate exception.",exception);
+        LOGGER.error("duplicate customer entry.", exception);
+        LOGGER.debug("test for debug in duplicate exception.", exception);
 
         ErrorDetailsForClient exceptionResponse = new ErrorDetailsForClient();
         String property = properties.getProperty(exception.getErrorCode());

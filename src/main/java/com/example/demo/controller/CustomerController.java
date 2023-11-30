@@ -18,7 +18,7 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
     @PostMapping("/createCustomer")
     @Transactional
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void insert(@Valid @RequestBody CustomerDto d) throws ServiceException {
+    public void insert(@Validated @RequestBody CustomerDto d) throws ServiceException {
 //        LOGGER.debug("insert method is called.");
 //        LOGGER.info("insert method in customerController's class called.",d);
         service.insert(converter.convertToE(d));

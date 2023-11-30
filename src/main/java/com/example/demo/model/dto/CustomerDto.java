@@ -18,8 +18,8 @@ public class CustomerDto extends AbstractDto {
     private String firstName;
     private String surName;
 //    @NotNull(message = "First name is required")
-//    @Pattern(regexp = "^\\d{10}$")
-    private Long nationalCode;
+    @Pattern(regexp = "^\\d{10}$",message = "شماره ملی باید10 رقم باشد.")
+    private String nationalCode;
 //    @Pattern(regexp = "^09[0|1|2|3][0-9]{8}$")
     private Long phoneNumber;
 //    private AccountEntity account;
