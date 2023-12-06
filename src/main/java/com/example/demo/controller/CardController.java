@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/card")
 
 public class CardController extends BaseController<CardEntity, CardDto, CardService> {
-    ObjectMapper objectMapper=new ObjectMapper();
+//    ObjectMapper objectMapper=new ObjectMapper();
     @PostMapping("/createCard")
 //    @ResponseStatus(HttpStatus.CREATED)
 //    @Transactional

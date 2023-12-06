@@ -6,8 +6,9 @@ import com.example.demo.model.entities.CardEntity;
 import com.example.demo.exceptionHandller.exceptions.ServiceException;
 import com.example.demo.exceptionHandller.exceptions.handledExceptions.DuplicateCustomerEntry;
 import com.example.demo.repositories.CustomerRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import com.example.demo.model.entities.CustomerEntity;
 import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,6 +60,11 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
         cardService.insert(card);
 
         repository.save(customer);
+    }
+
+    public List<CustomerEntity> getAll() {
+
+        return repository.findAll();
     }
 
     public CustomerEntity updateCustomer(CustomerEntity c) throws Exception {
@@ -158,9 +165,19 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
         return customerEntity;
     }
 
+   /* public List<CustomerEntity> sorted() {
+        return repository.findByOrderByFirstNameAsc();
+    }
+*/
+    /*public Page<CustomerEntity> findAll(CustomerEntity customer) {
+        return repository.findAll(Pageable.ofSize(4));
+
+    }*/
+
     public Optional<CustomerEntity> acquire(Long id) {
         return repository.findById(id);
     }
+
 
 
 }

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.model.dto.CustomerDto;
 import com.example.demo.model.entities.CustomerEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/customer")
 
@@ -28,7 +31,7 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
 
     @PutMapping("/updateCustomer")
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public CustomerDto update( @RequestBody CustomerDto customerDto) throws Exception {
+    public CustomerDto update(@RequestBody CustomerDto customerDto) throws Exception {
 
         return converter.convertToDto(service.updateCustomer(converter.convertToE(customerDto)));
     }
@@ -54,6 +57,23 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
         return converter.convertToDto(service.findById(id));
     }
 
+
+    @GetMapping("/getAll")
+    public List<CustomerDto> getAllEntities() {
+        /*List<CustomerEntity> customerEntityList=service.findAll();
+        List<String> myList = new ArrayList<String>();
+        myList.forEach(str -> System.out.println(str));
+        customerEntityList.forEach(customer -> customer.);*/
+
+        return converter.collectionConvertorToDto(service.getAll());
+    }
+
+/*
+    @GetMapping()
+    public List<CustomerEntity> getAll(@RequestParam ){
+        return service.sorted();
+    }
+*/
 
     @DeleteMapping("/{id}")
     public void deleteCustomerById(@PathVariable Long id) throws ServiceException {

@@ -12,7 +12,7 @@ public class CardDto extends AbstractDto{
 //    private Integer cvv2;
 //    private LocalDateTime expireDate;
     private Long cardNumber;
-    private AccountEntity account;
+//    private AccountEntity account;
 
 
 }

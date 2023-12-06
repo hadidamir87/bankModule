@@ -4,6 +4,7 @@ import com.example.demo.model.entities.CustomerEntity;
 //import com.example.demo.model.entities.CustomerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 
 
 //import com.example.demo.entities.CustomerEntity;
@@ -19,6 +20,7 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> 
 //    CustomerEntity findByFirstNameLike(String name);
 //    CustomerEntity findById(String id);
     Boolean existsByNationalCode(Long nationalCode);
+//    List<CustomerEntity> findByOrderByFirstNameAsc();
 
 
 }

@@ -35,8 +35,8 @@ import java.util.Arrays;
 @Component
 @Slf4j
 public class ControllerAspect {
-    @Autowired
-    private ObjectMapper objectMapper;
+  /*  @Autowired
+    private ObjectMapper objectMapper;*/
     @Autowired
     private LogRepository logRepository;
 
