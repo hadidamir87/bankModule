@@ -67,6 +67,12 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
         return repository.findAll();
     }
 
+    public List<CustomerEntity> getAllWithPageination(int pageNum,int pagSize) {
+
+        return repository.findAll(Pageable.ofSize(pagSize).withPage(pageNum)).getContent();
+    }
+
+
     public CustomerEntity updateCustomer(CustomerEntity c) throws Exception {
         try {
             CustomerEntity currentCustomer = repository.findById(c.getId()).orElse(null);

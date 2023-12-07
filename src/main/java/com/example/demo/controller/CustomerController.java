@@ -68,6 +68,17 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
         return converter.collectionConvertorToDto(service.getAll());
     }
 
+    @GetMapping("/getAllWithPagination")
+    public List<CustomerDto> getAllEntitiesWithPagination() {
+        /*List<CustomerEntity> customerEntityList=service.findAll();
+        List<String> myList = new ArrayList<String>();
+        myList.forEach(str -> System.out.println(str));
+        customerEntityList.forEach(customer -> customer.);*/
+
+        return converter.collectionConvertorToDto(service.getAllWithPageination(5,2));
+    }
+
+
 /*
     @GetMapping()
     public List<CustomerEntity> getAll(@RequestParam ){
