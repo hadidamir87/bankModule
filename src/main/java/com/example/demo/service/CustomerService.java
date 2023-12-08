@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-//@Valid
 public class CustomerService extends BaseService<CustomerEntity, CustomerRepository> {
     @Autowired
     private CardService cardService;
@@ -67,9 +66,9 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
         return repository.findAll();
     }
 
-    public List<CustomerEntity> getAllWithPageination(int pageNum,int pagSize) {
+    public List<CustomerEntity> getAllWithPagination(int pageNum) {
 
-        return repository.findAll(Pageable.ofSize(pagSize).withPage(pageNum)).getContent();
+        return repository.findAll(Pageable.ofSize(2).withPage(pageNum)).getContent();
     }
 
 
@@ -110,7 +109,6 @@ public class CustomerService extends BaseService<CustomerEntity, CustomerReposit
 
 
     public void deleteById(Long id) {
-//        CustomerService customerService=new CustomerService();
 
         repository.delete(repository.findById(id).get());
     }

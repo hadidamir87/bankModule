@@ -60,31 +60,15 @@ public class CustomerController extends BaseController<CustomerEntity, CustomerD
 
     @GetMapping("/getAll")
     public List<CustomerDto> getAllEntities() {
-        /*List<CustomerEntity> customerEntityList=service.findAll();
-        List<String> myList = new ArrayList<String>();
-        myList.forEach(str -> System.out.println(str));
-        customerEntityList.forEach(customer -> customer.);*/
 
         return converter.collectionConvertorToDto(service.getAll());
     }
 
     @GetMapping("/getAllWithPagination")
-    public List<CustomerDto> getAllEntitiesWithPagination() {
-        /*List<CustomerEntity> customerEntityList=service.findAll();
-        List<String> myList = new ArrayList<String>();
-        myList.forEach(str -> System.out.println(str));
-        customerEntityList.forEach(customer -> customer.);*/
+    public List<CustomerDto> getAllEntitiesWithPagination(@RequestParam("pageIndex") int pageIndex) {
 
-        return converter.collectionConvertorToDto(service.getAllWithPageination(5,2));
+        return converter.collectionConvertorToDto(service.getAllWithPagination(pageIndex));
     }
-
-
-/*
-    @GetMapping()
-    public List<CustomerEntity> getAll(@RequestParam ){
-        return service.sorted();
-    }
-*/
 
     @DeleteMapping("/{id}")
     public void deleteCustomerById(@PathVariable Long id) throws ServiceException {
