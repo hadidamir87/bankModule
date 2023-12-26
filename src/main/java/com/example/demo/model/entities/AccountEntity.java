@@ -2,6 +2,8 @@ package com.example.demo.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.springframework.stereotype.Component;
 
 //import javax.persistence.*;
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Component;
 //@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "account")
-//@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

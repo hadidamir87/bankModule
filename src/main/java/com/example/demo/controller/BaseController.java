@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class BaseController<E, D, S extends BaseService<E, ? extends JpaRepository<E, Long>>> {
 
-//    protected static final Logger LOGGER= LoggerFactory.getLogger(BaseController.class);
+    protected static final Logger LOGGER= LoggerFactory.getLogger(BaseController.class);
     @Autowired
     protected S service;
 

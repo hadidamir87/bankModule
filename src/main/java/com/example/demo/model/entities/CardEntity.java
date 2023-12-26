@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -15,6 +17,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "card")
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

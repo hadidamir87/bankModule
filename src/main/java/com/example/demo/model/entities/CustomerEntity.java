@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
 @Table(name = "customer")
 @AllArgsConstructor
 @NoArgsConstructor
-//@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 @Data
 @Component
 public class CustomerEntity extends EssentialEntity {
