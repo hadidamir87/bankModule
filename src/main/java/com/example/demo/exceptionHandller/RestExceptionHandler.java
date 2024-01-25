@@ -36,8 +36,9 @@ public class RestExceptionHandler {
     public void init() {
         try {
             properties.load(new FileReader(
-                    "F:\\H1\\Education\\programming\\Java\\develop\\demo1\\bank\\src\\main\\resources\\exceptions_fa_IR.properties",
+                    "F:\\H1\\JOB\\programming\\Java\\develop\\demo1\\bank\\src\\main\\resources\\exceptions_fa_IR.properties",
                     StandardCharsets.UTF_8));
+//            F:\H1\JOB\programming\Java\develop\demo1\bank\src\main\resources\exceptions_fa_IR.properties
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

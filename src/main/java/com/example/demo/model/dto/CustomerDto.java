@@ -13,7 +13,7 @@ import lombok.*;
 public class CustomerDto extends AbstractDto {
     //    private String id ;
 //    @Size(max = 5 , message = "User_Max_Size")
-    private Long id;
+//    private Long id;
     @Pattern(regexp = "^[A-Za-z\\s]+$")
     private String firstName;
     private String surName;
