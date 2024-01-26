@@ -17,6 +17,7 @@ public abstract class BaseController<E, D, S extends BaseService<E, ? extends Jp
     @Autowired
     protected BaseConvertor<E, D> converter;
 
+
 //    protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractController.class);
 
 

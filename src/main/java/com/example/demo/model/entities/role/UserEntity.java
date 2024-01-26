@@ -1,0 +1,66 @@
+package com.example.demo.model.entities.role;
+
+import com.example.demo.model.entities.EssentialEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+
+
+
+
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+//@Inheritance(strategy = InheritanceType.JOINED)
+// implements UserDetails
+public class UserEntity extends EssentialEntity{
+    private String name;
+    private String phoneNumber;
+    private String role;
+//    private boolean active=true;
+    @Column(unique = true, nullable = false)
+    private String username;
+    @Column(nullable = false)
+    @JsonIgnore
+    private String password;
+
+/*
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }*/
+
+}
+
+
+
+
